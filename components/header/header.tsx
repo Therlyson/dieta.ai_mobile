@@ -29,9 +29,10 @@ export function Header({step, title}: HeaderProps) {
     );
 }
 
+
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.blue,
+        backgroundColor: colors.white,
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
         marginBottom: 14,
