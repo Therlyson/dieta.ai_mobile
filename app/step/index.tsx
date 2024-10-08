@@ -6,20 +6,38 @@ import { useForm } from "react-hook-form"
 import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { ButtonStyle } from "@/components/button/buttonStyle";
+import {Link, router} from "expo-router";
+import { useDataStore } from "@/store/data";
 
 const schema = z.object({
-    name: z.string().min(1, { message: "O noem é obrigatório" }),
-    weight: z.number().min(1, { message: "O peso é obrigatório" }),
-    age: z.number().min(1, { message: "A idade é obrigatória" }),
-    height: z.number().min(1, { message: "A altura é obrigatória" })
+    name: z.string().min(1, { message: "O nome é obrigatório" }),
+    weight: z.string().min(1, { message: "O peso é obrigatório" }),
+    age: z.string().min(1, { message: "A idade é obrigatória" }),
+    height: z.string().min(1, { message: "A altura é obrigatória" })
+    /*
+    weight: z.preprocess((val) => Number(val), z.number().min(1, { message: "O peso é obrigatório" })),
+    age: z.preprocess((val) => Number(val), z.number().min(1, { message: "A idade é obrigatória" })),
+    height: z.preprocess((val) => Number(val), z.number().min(1, { message: "A altura é obrigatória" }))*/
 })
 type FormData = z.infer<typeof schema>
 
+const setPageOne = useDataStore((state) => state.setPageOne)
 
 export default function Step() {
     const { control, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
         resolver: zodResolver(schema)
     })
+
+    function handleCreate(data: FormData){
+        setPageOne({
+            name: data.name,
+            weight: data.weight,
+            age: data.age,
+            height: data.height
+        })
+        
+        router.push("/create")
+    }
 
     return (
         <View style={styles.container}>
@@ -58,7 +76,7 @@ export default function Step() {
                     error={errors.age?.message}
                     keyboardType="numeric"/>
 
-                <ButtonStyle text="Avançar"/>
+                <ButtonStyle text="Avançar" onPress={handleSubmit(handleCreate)}/> 
             </ScrollView>
         </View>
     );
