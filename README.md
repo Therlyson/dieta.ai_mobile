@@ -1,50 +1,28 @@
-# Welcome to your Expo app 👋
+# Dieta.AI Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Dieta.AI é um aplicativo mobile que gera dietas personalizadas usando IA, baseado nas informações fornecidas pelo usuário, como peso, altura, idade, metas de fitness e preferências. Ele oferece sugestões de refeições, suplementos e permite o compartilhamento direto do plano gerado. Construído com Expo e React Native, o app traz nutrição gerada por IA diretamente para o seu dia a dia.
 
-## Get started
+## 🚀 Funcionalidades
 
-1. Install dependencies
+1. **Geração de Dieta Personalizada com IA**: Receba dietas customizadas baseadas em suas informações pessoais.
+2. **Sugestões de Refeições**: Planos detalhados de refeições com horários e opções alimentares.
+3. **Dicas de Suplementos**: Sugestões de suplementos fornecidas pela IA para otimizar os resultados.
+4. **Planos Compartilháveis**: Compartilhe o plano de dieta diretamente com amigos ou nas redes sociais.
+5. **Experiência Mobile-First**: Aplicativo otimizado para dispositivos móveis, desenvolvido com Expo.
+6. **Interface Intuitiva**: Interface simples e intuitiva para navegar entre as sugestões de refeições e outras funcionalidades.
 
-   ```bash
-   npm install
-   ```
+## 🔧 Como Funciona (Passo a Passo)
 
-2. Start the app
+1. **Informações do Usuário**: Insira seus dados (nome, peso, altura, idade e objetivos).
+2. **Consulta IA**: O aplicativo usa IA para analisar suas informações e gerar um plano personalizado de refeições e suplementos.
+3. **Exibição da Dieta**: Os resultados são exibidos em um formato de lista simples com todos os detalhes necessários para cada refeição.
+4. **Compartilhamento**: Compartilhe seu plano de dieta via redes sociais ou outros aplicativos com apenas um clique.
+5. **Gerar Nova Dieta**: Se o plano atual não for o ideal, gere um novo facilmente.
 
-   ```bash
-    npx expo start
-   ```
+## 📦 Tecnologias Utilizadas
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **React Native**
+- **Expo**
+- **React Query**
+- **TypeScript**
+- **Integração com Serviço de IA**
