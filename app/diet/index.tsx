@@ -1,5 +1,6 @@
 import { colors } from "@/constants/colors";
-import { Text, View, StyleSheet,Pressable,Platform, StatusBar, SafeAreaView, ScrollView } from "react-native";
+import { Text, View, StyleSheet,Pressable,Platform, StatusBar, SafeAreaView, ScrollView,
+     Share,ActivityIndicator } from "react-native";
 import { useDataStore } from "@/store/data";
 import { api } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
@@ -23,17 +24,17 @@ export default function Diet(){
                     throw new Error("Filed load nutrition")
                 }
 
-                const response = await api.get<ResponseData>("/teste")
+                //const response = await api.get<ResponseData>("/teste")
 
-                /*const response = await api.post("/create", {
-                    name: user.name,
-                    weight: user.weight,
-                    height: user.height,
-                    age: user.age,
-                    level: user.level,
-                    objective: user.objective,
-                    gender: user.gender
-                })*/
+                const response = await api.post<ResponseData>("/create", {
+                     name: user.name,
+                     weight: user.weight,
+                     height: user.height,
+                     age: user.age,
+                     level: user.level,
+                     objective: user.objective,
+                     gender: user.gender
+                })
 
                 return response.data.data
             }catch(error){
@@ -43,13 +44,35 @@ export default function Diet(){
         }
     })
 
-    if(isFetching){
-        return(
+    async function handleShare(){
+        try{
+            if(data && Object.keys(data).length === 0)return;
+
+            const supplements = data?.suplementos.map(item => `- ${item}`).join('\n');
+
+            const foods = data?.refeicoes.map(item => 
+            `Nome: ${item.nome}\nHorário: ${item.horario}\nAlimentos:\n${item.alimentos.map(alimento => `  - ${alimento}`).join('\n')}`
+            ).join('\n\n');
+
+            const message = `Dieta: ${data?.nome}\nObjetivo: ${data?.objetivo}\n\nRefeições:\n\n${foods}\n\nSuplementos:\n${supplements}`;
+      
+            await Share.share({
+                message: message
+            })
+        }catch(error){
+            console.log(error)
+            alert("Falha ao compartilhar dieta")
+        }
+    }
+
+    if (isFetching) {
+        return (
             <View style={styles.loading}>
                 <Text style={styles.loadingText}>Estamos gerando sua dieta</Text>
                 <Text style={styles.loadingText}>Consultando IA...</Text>
+                <ActivityIndicator size="large" color={colors.white} />
             </View>
-        )
+        );
     }
 
     if(error){
@@ -70,7 +93,7 @@ export default function Diet(){
                 <View style={styles.contentHeader}>
                     <Text style={styles.title}>Minha dieta</Text>
 
-                    <Pressable style={styles.buttonShare}>
+                    <Pressable style={styles.buttonShare} onPress={handleShare}>
                         <Text style={styles.buttonShareText}>Compartilhar</Text>
                         <Ionicons name="share-social-outline" size={16} color="#FFF"/>
                     </Pressable>
@@ -130,18 +153,23 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background
     },
-    loading:{
+    loading: {
         flex: 1,
-        backgroundColor: colors.background,
+        backgroundColor: colors.background, 
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 20,
+        position: 'relative',
     },
-    loadingText:{
+    loadingText: {
         fontSize: 18,
-        color: colors.white,
-        marginBottom: 4,
-        justifyContent: 'center',
-        alignItems: 'center'
+        color: colors.white, 
+        marginBottom: 20, 
+        textAlign: 'center',
+        fontWeight: '600',
+        letterSpacing: 0.8,
+        textTransform: 'none',
+        opacity: 0.8,
     },
     containerHeader: {
         backgroundColor: colors.white,
